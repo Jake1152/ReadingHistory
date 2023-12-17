@@ -1,0 +1,24 @@
+{
+  "name": "findingbook",
+  "version": "0.0.1",
+  "description": "도서 통합 검색을 통한 내가 구하고 싶은 책을 한번의 검색으로 알아내기",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "mc"
+  },
+  "keywords": [
+    "FindingBook"
+  ],
+  "author": "Jinho Im",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
