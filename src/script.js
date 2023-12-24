@@ -15,3 +15,8 @@ function searchBooks() {
   liElement.classList.add("book-item");
   bookListArea.appendChild(liElement);
 }
+
+// function getBookList(searchKeyword) {
+//   searchKeyword;
+//   return;
+// }
