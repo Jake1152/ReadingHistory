@@ -20,10 +20,13 @@ router.get("/", async (req, res) => {
   // if (!keyword) {
   //   res.status(404).send("");
   // }
+  const page = req.query.page || 1;
+  const display = 10;
+  const start = 1 + display * (page - 1);
   console.log(`keyword: ${keyword}`);
   const apiResponse = await axios
     .get(apiEndpoint, {
-      params: { query: keyword, start: 1, display: 10 },
+      params: { query: keyword, start: start, display: display },
       headers: {
         "X-Naver-Client-Id": process.env.NAVER_BOOK_API_CLIENT_ID,
         "X-Naver-Client-Secret": process.env.NAVER_BOOK_API_CLIENT_SECRET,
