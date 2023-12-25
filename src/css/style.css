@@ -28,3 +28,25 @@ body {
   border-radius: 4px; /* Add rounded corners */
   background-color: azure;
 }
+
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+  float: left;
+  padding: 0.5em 1em;
+  text-decoration: none;
+}
+
+/* .wrapper .header_wrapper .service_mall_wrap .service_mall_inner .service_mall_box .service_mall_list .service_mall_item.brand_more .brand_more_list_box .brand_more_list .brand_more_item .brand_more_link .img_box { */
+.img_box {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-right: 6px;
+  border-radius: 100%;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.prod_area.horizontal .prod_thumb_box.type_bookcover.size_lg, .prod_area.horizontal .prod_thumb_box.type_bookcover.size_lg .img_box {
+  border-radius: 16px 16px 16px 0;
+}
