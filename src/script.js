@@ -7,7 +7,7 @@ const bookItemInfoOfList = {
   publisher: "",
   author: "",
   link: "",
-}
+};
 
 function getBookInfo(src, title, publisher, author) {
   return {
@@ -16,7 +16,7 @@ function getBookInfo(src, title, publisher, author) {
     publisher: publisher,
     author: author,
     // link: "",
-  }
+  };
 }
 
 // function getBookImageAnchorElement(href) {
@@ -29,18 +29,29 @@ function getBookInfo(src, title, publisher, author) {
 
 function getBookImageElement(href) {
   const imageElement = document.createElement("img");
-  imageElement.src = href
+  imageElement.src = href;
+  // imageElement.classList.add("img_box");
   // imageElement.classList.add("ui-tabs-anchor")
   // newAnchor.textContent = "Click me!";
-  return imageElement
+  return imageElement;
 }
 
-function getSpanElementForImage(href) {
+function getDivElementForImage(href) {
+  const divElement = document.createElement("div");
   const spanElement = document.createElement("span");
-  // spanElement.classList.add("img_box")
+  divElement.appendChild(spanElement);
+  // spanElement.classList.add("prod_thumb_box");
+  // spanElement.classList.add("img_box");
   const imageElement = getBookImageElement(href);
   spanElement.appendChild(imageElement);
-  return spanElement
+  return spanElement;
+}
+
+// function getBookInfoDivElement(bookInfo) { // bookInfo 객체
+function getBookInfoDivElement() {
+  const bookInfoDivElement = document.createElement("div");
+  bookInfoDivElement.classList.add("book_info");
+  return bookInfoDivElement;
 }
 
 /**
@@ -48,12 +59,16 @@ function getSpanElementForImage(href) {
  * li tag에 추가하는 것은 밖에서 처리한다.
  * FP스타일로 처리한다.
  */
-function getBookInfoDivElement(href) {
+function getBookInfoArea(href) {
   // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
-  const divElement = document.createElement("div");
-  const spanElement = getSpanElementForImage(href)
-  divElement.appendChild(spanElement);
-  return divElement
+  const bookInfoArea = document.createElement("div");
+  bookInfoArea.classList.add("prod_area");
+  bookInfoArea.classList.add("horizontal");
+  const bookImageSpanElement = getDivElementForImage(href);
+  // const bookInfoDivElement = getBookInfoDivElement;
+  // book info
+  bookInfoArea.appendChild(bookImageSpanElement);
+  return bookInfoArea;
 }
 
 function searchBooks() {
@@ -68,12 +83,13 @@ function searchBooks() {
   const liElement = document.createElement("li");
   // liElement.textContent = inputValue
   // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
-  const href = "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
-  const bookInfoDivTag = getBookInfoDivElement(href)
-  // // bookInfoDivTag
-  // liElement.appendChild(bookInfoDivTag); 
+  const href =
+    "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg";
+  const bookInfoArea = getBookInfoArea(href);
+  // // bookInfoArea
+  // liElement.appendChild(bookInfoArea);
   liElement.classList.add("book-item");
-  liElement.appendChild(bookInfoDivTag);
+  liElement.appendChild(bookInfoArea);
   bookListArea.appendChild(liElement);
 }
 
