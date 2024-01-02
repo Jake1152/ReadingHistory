@@ -65,9 +65,12 @@ function getBookInfoArea(href) {
   bookInfoArea.classList.add("prod_area");
   bookInfoArea.classList.add("horizontal");
   const bookImageSpanElement = getDivElementForImage(href);
-  // const bookInfoDivElement = getBookInfoDivElement;
+  bookImageSpanElement.classList.add("book_img_area");
+  const bookInfoDivElement = getBookInfoDivElement();
+  bookInfoDivElement.classList.add("book_info_area");
   // book info
   bookInfoArea.appendChild(bookImageSpanElement);
+  bookInfoArea.appendChild(bookInfoDivElement);
   return bookInfoArea;
 }
 
@@ -87,7 +90,6 @@ function searchBooks() {
     "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg";
   const bookInfoArea = getBookInfoArea(href);
   // // bookInfoArea
-  // liElement.appendChild(bookInfoArea);
   liElement.classList.add("book-item");
   liElement.appendChild(bookInfoArea);
   bookListArea.appendChild(liElement);
