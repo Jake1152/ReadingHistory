@@ -38,19 +38,22 @@ function getBookImageElement(href) {
 
 function getDivElementForImage(href) {
   const divElement = document.createElement("div");
-  const spanElement = document.createElement("span");
-  divElement.appendChild(spanElement);
+  // const spanElement = document.createElement("span");
+  // divElement.appendChild(spanElement);
   // spanElement.classList.add("prod_thumb_box");
   // spanElement.classList.add("img_box");
   const imageElement = getBookImageElement(href);
-  spanElement.appendChild(imageElement);
-  return spanElement;
+  divElement.appendChild(imageElement);
+  divElement.classList.add("book_img_area");
+  return divElement;
 }
 
 // function getBookInfoDivElement(bookInfo) { // bookInfo 객체
 function getBookInfoDivElement() {
   const bookInfoDivElement = document.createElement("div");
-  bookInfoDivElement.classList.add("book_info");
+  // bookInfoDivElement.classList.add("book_info");
+  bookInfoDivElement.classList.add("book_info_area");
+
   return bookInfoDivElement;
 }
 
@@ -62,14 +65,12 @@ function getBookInfoDivElement() {
 function getBookInfoArea(href) {
   // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
   const bookInfoArea = document.createElement("div");
-  bookInfoArea.classList.add("prod_area");
-  bookInfoArea.classList.add("horizontal");
-  const bookImageSpanElement = getDivElementForImage(href);
-  bookImageSpanElement.classList.add("book_img_area");
+  // bookInfoArea.classList.add("prod_area");
+  // bookInfoArea.classList.add("horizontal");
+  const bookImageElement = getDivElementForImage(href);
   const bookInfoDivElement = getBookInfoDivElement();
-  bookInfoDivElement.classList.add("book_info_area");
   // book info
-  bookInfoArea.appendChild(bookImageSpanElement);
+  bookInfoArea.appendChild(bookImageElement);
   bookInfoArea.appendChild(bookInfoDivElement);
   return bookInfoArea;
 }
@@ -86,12 +87,13 @@ function searchBooks() {
   const liElement = document.createElement("li");
   // liElement.textContent = inputValue
   // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
-  const href =
-    "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg";
+  // const href =
+  //   "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg";
+  const href = "";
   const bookInfoArea = getBookInfoArea(href);
   // // bookInfoArea
-  liElement.classList.add("book-item");
   liElement.appendChild(bookInfoArea);
+  liElement.classList.add("book-item");
   bookListArea.appendChild(liElement);
 }
 
