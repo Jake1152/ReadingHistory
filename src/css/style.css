@@ -30,6 +30,7 @@ body {
   border-radius: 4px; /* Add rounded corners */
   background-color: azure;
   display: flex;
+  flex-direction: row;
 }
 
 .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
