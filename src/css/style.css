@@ -24,9 +24,10 @@ body {
 /* Style for the book-item class */
 .book-item {
   /* list-style: none; Remove default list item marker */
+  /* width: 50% */
   margin-bottom: 8px; /* Adjust spacing between items */
   padding: 8px; /* Add padding for better visual appearance */
-  border: 1px solid #fc0707; /* Add a border for separation */
+  border: 1px solid #ac13c0; /* Add a border for separation */
   border-radius: 4px; /* Add rounded corners */
   background-color: azure;
   display: flex;
@@ -56,7 +57,7 @@ body {
 } */
 
 .prod_area.horizontal {
-  width: 100%;
+  /* width: 100%; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -81,7 +82,7 @@ body {
 .prod_area .prod_thumb_box {
   position: relative;
   overflow: hidden;
-  width: 142px;
+  /* width: 142px; */
   border: 1px solid #fc0707;
   list-style: none; /* Remove default list item marker */
   margin-bottom: 8px; /* Adjust spacing between items */
@@ -92,7 +93,7 @@ body {
 }
 
 .prod_area.horizontal .prod_thumb_box.size_lg {
-  width: 142px;
+  /* width: 142px; */
   /* border: 1px solid #fc0707; */
   list-style: none; /* Remove default list item marker */
   margin-bottom: 8px; /* Adjust spacing between items */
@@ -102,13 +103,13 @@ body {
   background-color: azure;
 }
 
-.book_img_area {
+.book-img-area {
   width: 50%;
   border: 1px solid #07fc65; /* Add a border for separation */
   background-color: azure;
 }
 
-.book_info_area {
+.book-info-area {
   width: 50%;
   /* border: 1px solid black; */
   border: 1px solid #850cf7; /* Add a border for separation */

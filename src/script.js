@@ -44,15 +44,14 @@ function getDivElementForImage(href) {
   // spanElement.classList.add("img_box");
   const imageElement = getBookImageElement(href);
   divElement.appendChild(imageElement);
-  divElement.classList.add("book_img_area");
+  divElement.classList.add("book-img-area");
   return divElement;
 }
 
 // function getBookInfoDivElement(bookInfo) { // bookInfo 객체
 function getBookInfoDivElement() {
   const bookInfoDivElement = document.createElement("div");
-  // bookInfoDivElement.classList.add("book_info");
-  bookInfoDivElement.classList.add("book_info_area");
+  // bookInfoDivElement.classList.add("book-info-area");
 
   return bookInfoDivElement;
 }
@@ -71,7 +70,9 @@ function getBookInfoArea(href) {
   const bookInfoDivElement = getBookInfoDivElement();
   // book info
   bookInfoArea.appendChild(bookImageElement);
+  bookInfoArea.classList.add("book-img-area");
   bookInfoArea.appendChild(bookInfoDivElement);
+  bookInfoArea.classList.add("book-info-area");
   return bookInfoArea;
 }
 
