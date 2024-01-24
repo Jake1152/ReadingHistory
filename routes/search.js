@@ -4,6 +4,7 @@ const router = express.Router();
 const axios = require("axios");
 const xml2js = require("xml2js");
 
+// search?keyword=rust
 router.get("/", async (req, res) => {
   //   const apiEndpoint = `https://www.nl.go.kr/NL/search/openApi/search.do?key=${process.env.OPENAPI_KEY}&kwd=%ED%86%A0%EC%A7%80`;
   // const apiEndpoint = `http://data4library.kr/api/libSrch?authKey=${process.env.OPENAPI_KEY}&pageNo=1&pageSize=10`;
@@ -14,9 +15,18 @@ router.get("/", async (req, res) => {
   //   -H "X-Naver-Client-Secret: blashblash" -v
   // const apiResponse = await axios.get("/v1/search/book.json", {
   //   baseURL: "https://openapi.naver.com",
+
+  const keyword = req.query.keyword || "";
+  // if (!keyword) {
+  //   res.status(404).send("");
+  // }
+  const page = req.query.page || 1;
+  const display = 10;
+  const start = 1 + display * (page - 1);
+  console.log(`keyword: ${keyword}`);
   const apiResponse = await axios
     .get(apiEndpoint, {
-      params: { query: "rust", start: 142, display: 100 },
+      params: { query: keyword, start: start, display: display },
       headers: {
         "X-Naver-Client-Id": process.env.NAVER_BOOK_API_CLIENT_ID,
         "X-Naver-Client-Secret": process.env.NAVER_BOOK_API_CLIENT_SECRET,
@@ -25,7 +35,7 @@ router.get("/", async (req, res) => {
     .catch((error) => {
       console.error(error);
     });
-  res.json(apiResponse.data);
+  res.json(apiResponse?.data);
 });
 
 module.exports = router;

@@ -15,16 +15,103 @@ body {
 
 #book-list {
   list-style: none;
-  padding: 0;
-  text-align: center;
+  /* display: flex; */
+  justify-content: space-between;
+  /* padding: 0;
+  text-align: center; */
 }
 
 /* Style for the book-item class */
 .book-item {
+  /* list-style: none; Remove default list item marker */
+  /* width: 50% */
+  margin-bottom: 8px; /* Adjust spacing between items */
+  padding: 8px; /* Add padding for better visual appearance */
+  border: 1px solid #ac13c0; /* Add a border for separation */
+  border-radius: 4px; /* Add rounded corners */
+  background-color: azure;
+  display: flex;
+  flex-direction: row;
+}
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+  float: left;
+  padding: 0.5em 1em;
+  text-decoration: none;
+}
+
+/* .wrapper .header_wrapper .service_mall_wrap .service_mall_inner .service_mall_box .service_mall_list .service_mall_item.brand_more .brand_more_list_box .brand_more_list .brand_more_item .brand_more_link .img_box { */
+.img_box {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-right: 6px;
+  border-radius: 100%;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+/* .prod_area.horizontal .prod_thumb_box.type_bookcover.size_lg,
+.prod_area.horizontal .prod_thumb_box.type_bookcover.size_lg .img_box {
+  border-radius: 16px 16px 16px 0;
+} */
+
+.prod_area.horizontal {
+  /* width: 100%; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+
+.prod_area .prod_thumb_box {
+  position: relative;
+  overflow: hidden;
+  /* width: 142px; */
+  border: 1px solid #fc0707;
   list-style: none; /* Remove default list item marker */
   margin-bottom: 8px; /* Adjust spacing between items */
   padding: 8px; /* Add padding for better visual appearance */
-  border: 1px solid #ccc; /* Add a border for separation */
+  border: 1px solid #fc0707; /* Add a border for separation */
   border-radius: 4px; /* Add rounded corners */
+  background-color: azure;
+}
+
+.prod_area.horizontal .prod_thumb_box.size_lg {
+  /* width: 142px; */
+  /* border: 1px solid #fc0707; */
+  list-style: none; /* Remove default list item marker */
+  margin-bottom: 8px; /* Adjust spacing between items */
+  padding: 8px; /* Add padding for better visual appearance */
+  border: 1px solid #fc0707; /* Add a border for separation */
+  border-radius: 4px; /* Add rounded corners */
+  background-color: azure;
+}
+
+.book-img-area {
+  width: 50%;
+  border: 1px solid #07fc65; /* Add a border for separation */
+  background-color: azure;
+}
+
+.book-info-area {
+  width: 50%;
+  /* border: 1px solid black; */
+  border: 1px solid #850cf7; /* Add a border for separation */
   background-color: azure;
 }
