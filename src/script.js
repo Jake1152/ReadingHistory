@@ -76,6 +76,14 @@ function getBookInfoArea(href) {
   return bookInfoArea;
 }
 
+/**
+ *
+ * @returns book list
+ */
+function getSearchedBookList() {
+  return;
+}
+
 function searchBooks() {
   const inputElement = document.getElementById("search-input");
   const inputValue = inputElement.value;
