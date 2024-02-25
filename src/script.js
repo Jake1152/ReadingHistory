@@ -77,33 +77,49 @@ function getBookInfoArea(href) {
 }
 
 /**
- *
+ * backend에 만들어둔 search api 호출하여 값을 가져온다
+ * search 창에 입력 받은 값을 넘겨받아서 화면에 출력한다
+ * fetch로 호출해서 받은값은 return 시킬 수 없는가?
  * @returns book list
  */
 function getSearchedBookList() {
-  return;
+  // http://localhost:4242/search?keyword=python&page=43
+  // fetch("https://localhost:4242/search")
+  // 현재 페이지의 전체 URL 가져오기
+  // const currentURL = window.location.href;
+  // console.log(`currentURL: ${currentURL}`);
+  fetch("http://localhost:4242/search?keyword=python")
+    .then((response) => {
+      // console.log("#  response.json()");
+      response.json();
+    })
+    .then((data) => {
+      console.log("#data", data);
+    });
 }
 
 function searchBooks() {
-  const inputElement = document.getElementById("search-input");
-  const inputValue = inputElement.value;
-  if (!inputValue.trim()) return;
-  console.log("input value : ", inputValue);
-  // console.log("process.env.PORT : ", process.env.PORT);
-  //   alert("Clicked search button");
-  inputElement.value = "";
-  const bookListArea = document.getElementById("book-list");
-  const liElement = document.createElement("li");
-  // liElement.textContent = inputValue
-  // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
-  // const href =
-  //   "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg";
-  const href = "";
-  const bookInfoArea = getBookInfoArea(href);
-  // // bookInfoArea
-  liElement.appendChild(bookInfoArea);
-  liElement.classList.add("book-item");
-  bookListArea.appendChild(liElement);
+  // console.log("### searchBooks");
+  getSearchedBookList();
+  // const inputElement = document.getElementById("search-input");
+  // const inputValue = inputElement.value;
+  // if (!inputValue.trim()) return;
+  // console.log("input value : ", inputValue);
+  // // console.log("process.env.PORT : ", process.env.PORT);
+  // //   alert("Clicked search button");
+  // inputElement.value = "";
+  // const bookListArea = document.getElementById("book-list");
+  // const liElement = document.createElement("li");
+  // // liElement.textContent = inputValue
+  // // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
+  // // const href =
+  // //   "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg";
+  // const href = "";
+  // const bookInfoArea = getBookInfoArea(href);
+  // // // bookInfoArea
+  // liElement.appendChild(bookInfoArea);
+  // liElement.classList.add("book-item");
+  // bookListArea.appendChild(liElement);
 }
 
 // function getBookList(searchKeyword) {
