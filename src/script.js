@@ -49,9 +49,10 @@ function getDivElementForImage(href) {
 }
 
 // function getBookInfoDivElement(bookInfo) { // bookInfo 객체
-function getBookInfoDivElement() {
+function getBookInfoDivElement(item) {
   const bookInfoDivElement = document.createElement("div");
   // bookInfoDivElement.classList.add("book-info-area");
+  bookInfoDivElement.textContent = item.title;
 
   return bookInfoDivElement;
 }
@@ -61,13 +62,13 @@ function getBookInfoDivElement() {
  * li tag에 추가하는 것은 밖에서 처리한다.
  * FP스타일로 처리한다.
  */
-function getBookInfoArea(href) {
+function getBookInfoArea(item) {
   // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
   const bookInfoArea = document.createElement("div");
   // bookInfoArea.classList.add("prod_area");
   // bookInfoArea.classList.add("horizontal");
-  const bookImageElement = getDivElementForImage(href);
-  const bookInfoDivElement = getBookInfoDivElement();
+  const bookImageElement = getDivElementForImage(item["image"]);
+  const bookInfoDivElement = getBookInfoDivElement(item);
   // book info
   bookInfoArea.appendChild(bookImageElement);
   bookInfoArea.classList.add("book-img-area");
@@ -80,27 +81,67 @@ function getBookInfoArea(href) {
  * backend에 만들어둔 search api 호출하여 값을 가져온다
  * search 창에 입력 받은 값을 넘겨받아서 화면에 출력한다
  * fetch로 호출해서 받은값은 return 시킬 수 없는가?
+ *
+ * 받아온 값을 화면에 뿌려준다.
+ *
+ * 입력된 값 한줄 한줄 하나의 row 형태로 담아서 화면에 보여준다
+ *
  * @returns book list
  */
-function getSearchedBookList() {
+async function getSearchedBookList() {
   // http://localhost:4242/search?keyword=python&page=43
   // fetch("https://localhost:4242/search")
   // 현재 페이지의 전체 URL 가져오기
   // const currentURL = window.location.href;
   // console.log(`currentURL: ${currentURL}`);
-  fetch("http://localhost:4242/search?keyword=python")
-    .then((response) => {
-      // console.log("#  response.json()");
-      response.json();
-    })
-    .then((data) => {
-      console.log("#data", data);
-    });
+  const URL = "http://localhost:4242/search?keyword=rust";
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+  // OLD version
+  // fetch()
+  //   .then((response) => {
+  //     // console.log("#  response.json()");
+  //     response.json();
+  //   })
+  //   .then((data) => {
+  //     console.log("#data", data);
+  //     return data;
+  //   });
 }
+/**
+ *
+ * @param {*} item book item fo Naver book api's response
+ */
+function renderBookElement(item) {
+  const bookListArea = document.getElementById("book-list");
+  const liElement = document.createElement("li");
+  // liElement.textContent = inputValue
+  // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
+  // const imgSrc =
+  //   "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg";
+  const bookInfoArea = getBookInfoArea(item);
+  // // bookInfoArea
+  liElement.appendChild(bookInfoArea);
+  liElement.classList.add("book-item");
+  bookListArea.appendChild(liElement);
+}
+/**
+ * total에 이를 때까지 api 호출, 현재 값 기억 필요
+ * item마다 한개씩 화면에 element를 찍어준다.
+ */
+async function searchBooks() {
+  console.log("### searchBooks");
+  const searchedBookList = await getSearchedBookList();
+  console.log(searchedBookList);
+  // console.log('searchedBookList["display"] : ', searchedBookList["display"]);
+  // for (let idx = 0; idx < searchedBookList["display"]; idx++) {
 
-function searchBooks() {
-  // console.log("### searchBooks");
-  getSearchedBookList();
+  // }
+  for (item of searchedBookList["items"]) {
+    renderBookElement(item);
+    // console.log("item : ", item);
+  }
   // const inputElement = document.getElementById("search-input");
   // const inputValue = inputElement.value;
   // if (!inputValue.trim()) return;
@@ -108,18 +149,6 @@ function searchBooks() {
   // // console.log("process.env.PORT : ", process.env.PORT);
   // //   alert("Clicked search button");
   // inputElement.value = "";
-  // const bookListArea = document.getElementById("book-list");
-  // const liElement = document.createElement("li");
-  // // liElement.textContent = inputValue
-  // // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
-  // // const href =
-  // //   "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg";
-  // const href = "";
-  // const bookInfoArea = getBookInfoArea(href);
-  // // // bookInfoArea
-  // liElement.appendChild(bookInfoArea);
-  // liElement.classList.add("book-item");
-  // bookListArea.appendChild(liElement);
 }
 
 // function getBookList(searchKeyword) {
