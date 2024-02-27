@@ -1,6 +1,22 @@
 // const dotenv = require("dotenv");
 // dotenv.config();
 
+// ------ handler event -----------
+
+/**
+ * Enter 입력시 적용되도록 keypress 이벤트를 사용하였었지만
+ * keypree가 deprecated인 관계로 keydown으로 변경하였다
+ * @param {} event
+ *
+ */
+function handleKeyDown(event) {
+  if (event.keyCode === 13) {
+    searchBooks();
+  }
+}
+
+// ---------------------------------
+
 const bookItemInfoOfList = {
   src: "",
   title: "",
@@ -78,77 +94,70 @@ function getBookInfoArea(item) {
 }
 
 /**
- * backend에 만들어둔 search api 호출하여 값을 가져온다
- * search 창에 입력 받은 값을 넘겨받아서 화면에 출력한다
- * fetch로 호출해서 받은값은 return 시킬 수 없는가?
- *
- * 받아온 값을 화면에 뿌려준다.
- *
- * 입력된 값 한줄 한줄 하나의 row 형태로 담아서 화면에 보여준다
- *
+ * fetch를 async, await 형태로 변경한 뒤 정상적으로 받은 response를 return한다.
+ * 수신하는 쪽에서도 async / await형태이어야 한다.
  * @returns book list
  */
-async function getSearchedBookList() {
+async function getSearchedBookList(searchKeyword) {
   // http://localhost:4242/search?keyword=python&page=43
   // fetch("https://localhost:4242/search")
   // 현재 페이지의 전체 URL 가져오기
   // const currentURL = window.location.href;
   // console.log(`currentURL: ${currentURL}`);
-  const URL = "http://localhost:4242/search?keyword=rust";
-  const response = await fetch(URL);
+  const URL = "http://localhost:4242";
+  const searchURL = URL + "/search?keyword=" + searchKeyword;
+  console.log(`##searchURL : ${searchURL}`);
+  const response = await fetch(searchURL);
   const data = await response.json();
   return data;
   // OLD version
-  // fetch()
-  //   .then((response) => {
-  //     // console.log("#  response.json()");
-  //     response.json();
-  //   })
-  //   .then((data) => {
-  //     console.log("#data", data);
-  //     return data;
-  //   });
+  /**
+  fetch()
+    .then((response) => {
+      // console.log("#  response.json()");
+      response.json();
+    })
+    .then((data) => {
+      console.log("#data", data);
+      return data;
+    });
+  */
 }
 /**
- *
+ * -주석 규칙 파악
+ * -
  * @param {*} item book item fo Naver book api's response
  */
 function renderBookElement(item) {
   const bookListArea = document.getElementById("book-list");
   const liElement = document.createElement("li");
-  // liElement.textContent = inputValue
-  // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
-  // const imgSrc =
-  //   "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg";
   const bookInfoArea = getBookInfoArea(item);
-  // // bookInfoArea
+  // liElement.textContent = inputValue
   liElement.appendChild(bookInfoArea);
   liElement.classList.add("book-item");
   bookListArea.appendChild(liElement);
 }
+
 /**
  * total에 이를 때까지 api 호출, 현재 값 기억 필요
  * item마다 한개씩 화면에 element를 찍어준다.
  */
 async function searchBooks() {
   console.log("### searchBooks");
-  const searchedBookList = await getSearchedBookList();
+  const inputElement = document.getElementById("search-input");
+  const searchKeyword = inputElement.value;
+  if (!searchKeyword.trim()) return;
+  console.log("input value : ", searchKeyword);
+  const searchedBookList = await getSearchedBookList(searchKeyword);
   console.log(searchedBookList);
-  // console.log('searchedBookList["display"] : ', searchedBookList["display"]);
-  // for (let idx = 0; idx < searchedBookList["display"]; idx++) {
 
-  // }
+  // // console.log("process.env.PORT : ", process.env.PORT);
+  // //   alert("Clicked search button");
+  // inputElement.value = "";
   for (item of searchedBookList["items"]) {
     renderBookElement(item);
     // console.log("item : ", item);
   }
-  // const inputElement = document.getElementById("search-input");
-  // const inputValue = inputElement.value;
-  // if (!inputValue.trim()) return;
-  // console.log("input value : ", inputValue);
-  // // console.log("process.env.PORT : ", process.env.PORT);
-  // //   alert("Clicked search button");
-  // inputElement.value = "";
 }
 
 // function getBookList(searchKeyword) {
