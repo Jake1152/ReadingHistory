@@ -132,6 +132,7 @@ function renderBookElement(item) {
   const bookListArea = document.getElementById("book-list");
   const liElement = document.createElement("li");
   const bookInfoArea = getBookInfoArea(item);
+
   // liElement.textContent = inputValue
   liElement.appendChild(bookInfoArea);
   liElement.classList.add("book-item");
@@ -141,9 +142,36 @@ function renderBookElement(item) {
 /**
  * total에 이를 때까지 api 호출, 현재 값 기억 필요
  * item마다 한개씩 화면에 element를 찍어준다.
+ * 
+ * # 검색할때 book list area의 innerHTML 요소 초기화
+ *이 방식으로 지우는 게 괜찮은 방식인가?
+  다른 방식은 없는가?
+  효율성의 문제나 예상치 못한 버그가 있을 가능성은 없는가?
+  const bookListArea = document.getElementById("book-list");
+  bookListArea.innerHTML = ""; // 이전에 그렸던 내용 제거
+  
+ * GPT answer 29FEB24
+   이 방식은 일반적으로 간단하고 효율적입니다. 그러나 대규모의 요소를 다루거나 특정한 상황에서는 성능 문제가 발생할 수 있습니다. 이 방법의 장단점은 다음과 같습니다.
+장점:
+
+간단하고 직관적입니다. 코드가 명확하며, 다른 개발자가 이해하기 쉽습니다.
+브라우저가 자동으로 메모리를 관리하므로 일반적으로 이 정도의 요소를 제거하는 것은 성능에 큰 영향을 미치지 않습니다.
+단점:
+
+대량의 요소가 있을 경우, innerHTML을 사용하여 모든 자식 요소를 지우는 것은 성능 저하를 일으킬 수 있습니다. 이 경우, 요소를 하나씩 제거하는 것이 더 효율적일 수 있습니다.
+innerHTML을 사용하면 이벤트 핸들러와 같은 추가적인 데이터와 상태도 함께 제거됩니다. 때로는 이러한 데이터를 보존하고자 할 수도 있습니다.
+스크립트에서 직접 HTML 코드를 조작하는 것은 보안 측면에서 취약할 수 있습니다. 특히 동적으로 생성된 콘텐츠의 경우, 사용자 입력을 신뢰하고 직접 HTML에 추가하는 것은 XSS(Cross-Site Scripting) 취약점을 초래할 수 있습니다.
+대규모의 요소를 처리하거나 추가적인 상태를 유지하고자 할 때는 이러한 단점을 고려하여 다른 접근 방식을 사용할 수 있습니다. 예를 들어, 더 효율적인 요소 제거를 위해 DOM을 직접 조작하는 방법을 사용하거나, 프레임워크나 라이브러리를 사용하여 상태를 관리할 수 있습니다. 또한, 보안 측면에서는 사용자 입력을 신뢰하고 직접 HTML 코드에 추가하는 대신, 안전한 방법으로 콘텐츠를 추가하는 것이 좋습니다.
  */
 async function searchBooks() {
   console.log("### searchBooks");
+
+  // 이 방식으로 지우는 게 괜찮은 방식인가?
+  // 다른 방식은 없는가?
+  // 효율성의 문제나 예상치 못한 버그가 있을 가능성은 없는가?
+  const bookListArea = document.getElementById("book-list");
+  bookListArea.innerHTML = ""; // 이전에 그렸던 내용 제거
+
   const inputElement = document.getElementById("search-input");
   const searchKeyword = inputElement.value;
   if (!searchKeyword.trim()) return;
@@ -151,16 +179,8 @@ async function searchBooks() {
   const searchedBookList = await getSearchedBookList(searchKeyword);
   console.log(searchedBookList);
 
-  // // console.log("process.env.PORT : ", process.env.PORT);
-  // //   alert("Clicked search button");
   // inputElement.value = "";
   for (item of searchedBookList["items"]) {
     renderBookElement(item);
-    // console.log("item : ", item);
   }
 }
-
-// function getBookList(searchKeyword) {
-//   searchKeyword;
-//   return;
-// }
