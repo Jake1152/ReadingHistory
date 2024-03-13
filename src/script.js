@@ -9,11 +9,11 @@
  * @param {} event
  *
  */
-function handleKeyDown(event) {
+const handleKeyDown = (event) => {
   if (event.keyCode === 13) {
     searchBooks();
   }
-}
+};
 
 // ---------------------------------
 
@@ -25,7 +25,7 @@ const bookItemInfoOfList = {
   link: "",
 };
 
-function getBookInfo(src, title, publisher, author) {
+const getBookInfo = (src, title, publisher, author) => {
   return {
     src: src,
     title: title,
@@ -33,7 +33,7 @@ function getBookInfo(src, title, publisher, author) {
     author: author,
     // link: "",
   };
-}
+};
 
 // function getBookImageAnchorElement(href) {
 //   const anchorElement = document.createElement("a");
@@ -43,16 +43,16 @@ function getBookInfo(src, title, publisher, author) {
 //   return anchorElement
 // }
 
-function getBookImageElement(href) {
+const getBookImageElement = (href) => {
   const imageElement = document.createElement("img");
   imageElement.src = href;
   // imageElement.classList.add("img_box");
   // imageElement.classList.add("ui-tabs-anchor")
   // newAnchor.textContent = "Click me!";
   return imageElement;
-}
+};
 
-function getDivElementForImage(href) {
+const getDivElementForImage = (href) => {
   const divElement = document.createElement("div");
   // const spanElement = document.createElement("span");
   // divElement.appendChild(spanElement);
@@ -62,23 +62,23 @@ function getDivElementForImage(href) {
   divElement.appendChild(imageElement);
   divElement.classList.add("book-img-area");
   return divElement;
-}
+};
 
 // function getBookInfoDivElement(bookInfo) { // bookInfo 객체
-function getBookInfoDivElement(item) {
+const getBookInfoDivElement = (item) => {
   const bookInfoDivElement = document.createElement("div");
   // bookInfoDivElement.classList.add("book-info-area");
   bookInfoDivElement.textContent = item.title;
 
   return bookInfoDivElement;
-}
+};
 
 /**
  * div를 구성할 수 있는 요소들을 넘겨받아서 list를 구성할 div tag에 값들을 구성하여 return 한다
  * li tag에 추가하는 것은 밖에서 처리한다.
  * FP스타일로 처리한다.
  */
-function getBookInfoArea(item) {
+const getBookInfoArea = (item) => {
   // "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162542125.jpg"
   const bookInfoArea = document.createElement("div");
   // bookInfoArea.classList.add("prod_area");
@@ -91,14 +91,14 @@ function getBookInfoArea(item) {
   bookInfoArea.appendChild(bookInfoDivElement);
   bookInfoArea.classList.add("book-info-area");
   return bookInfoArea;
-}
+};
 
 /**
  * fetch를 async, await 형태로 변경한 뒤 정상적으로 받은 response를 return한다.
  * 수신하는 쪽에서도 async / await형태이어야 한다.
  * @returns book list
  */
-async function getSearchedBookList(searchKeyword) {
+const getSearchedBookList = async (searchKeyword) => {
   // http://localhost:4242/search?keyword=python&page=43
   // fetch("https://localhost:4242/search")
   // 현재 페이지의 전체 URL 가져오기
@@ -122,13 +122,13 @@ async function getSearchedBookList(searchKeyword) {
       return data;
     });
   */
-}
+};
 /**
  * -주석 규칙 파악
  * -
  * @param {*} item book item fo Naver book api's response
  */
-function renderBookElement(item) {
+const renderBookElement = (item) => {
   const bookListArea = document.getElementById("book-list");
   const liElement = document.createElement("li");
   const bookInfoArea = getBookInfoArea(item);
@@ -137,7 +137,7 @@ function renderBookElement(item) {
   liElement.appendChild(bookInfoArea);
   liElement.classList.add("book-item");
   bookListArea.appendChild(liElement);
-}
+};
 
 /**
  * total에 이를 때까지 api 호출, 현재 값 기억 필요
@@ -163,7 +163,7 @@ innerHTML을 사용하면 이벤트 핸들러와 같은 추가적인 데이터�
 스크립트에서 직접 HTML 코드를 조작하는 것은 보안 측면에서 취약할 수 있습니다. 특히 동적으로 생성된 콘텐츠의 경우, 사용자 입력을 신뢰하고 직접 HTML에 추가하는 것은 XSS(Cross-Site Scripting) 취약점을 초래할 수 있습니다.
 대규모의 요소를 처리하거나 추가적인 상태를 유지하고자 할 때는 이러한 단점을 고려하여 다른 접근 방식을 사용할 수 있습니다. 예를 들어, 더 효율적인 요소 제거를 위해 DOM을 직접 조작하는 방법을 사용하거나, 프레임워크나 라이브러리를 사용하여 상태를 관리할 수 있습니다. 또한, 보안 측면에서는 사용자 입력을 신뢰하고 직접 HTML 코드에 추가하는 대신, 안전한 방법으로 콘텐츠를 추가하는 것이 좋습니다.
  */
-async function searchBooks() {
+const searchBooks = async () => {
   console.log("### searchBooks");
 
   // 이 방식으로 지우는 게 괜찮은 방식인가?
@@ -183,4 +183,4 @@ async function searchBooks() {
   for (item of searchedBookList["items"]) {
     renderBookElement(item);
   }
-}
+};

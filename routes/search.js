@@ -5,6 +5,9 @@ const axios = require("axios");
 const xml2js = require("xml2js");
 
 // search?keyword=rust
+/**
+ * @see https://openapi.naver.com
+ */
 router.get("/", async (req, res) => {
   //   const apiEndpoint = `https://www.nl.go.kr/NL/search/openApi/search.do?key=${process.env.OPENAPI_KEY}&kwd=%ED%86%A0%EC%A7%80`;
   // const apiEndpoint = `http://data4library.kr/api/libSrch?authKey=${process.env.OPENAPI_KEY}&pageNo=1&pageSize=10`;
