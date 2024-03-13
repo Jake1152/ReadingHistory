@@ -1,5 +1,5 @@
 const searchButton = document.getElementById("searchButton");
-
+const searchInput = document.getElementById("search-input");
 // const dotenv = require("dotenv");
 // dotenv.config();
 
@@ -192,4 +192,5 @@ const searchBooks = async () => {
  */
 window.addEventListener("load", () => {
   searchButton.addEventListener("click", searchBooks);
+  searchInput.addEventListener("keydown", handleKeyDown);
 });
