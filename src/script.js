@@ -1,3 +1,5 @@
+const searchButton = document.getElementById("searchButton");
+
 // const dotenv = require("dotenv");
 // dotenv.config();
 
@@ -184,3 +186,10 @@ const searchBooks = async () => {
     renderBookElement(item);
   }
 };
+
+/**
+ *
+ */
+window.addEventListener("load", () => {
+  searchButton.addEventListener("click", searchBooks);
+});
