@@ -1,3 +1,5 @@
+"use strict";
+
 const searchButton = document.getElementById("searchButton");
 const searchInput = document.getElementById("search-input");
 // const dotenv = require("dotenv");
