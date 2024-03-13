@@ -37,14 +37,6 @@ const getBookInfo = (src, title, publisher, author) => {
   };
 };
 
-// function getBookImageAnchorElement(href) {
-//   const anchorElement = document.createElement("a");
-//   anchorElement.href = href
-//   anchorElement.classList.add("ui-tabs-anchor")
-//   // newAnchor.textContent = "Click me!";
-//   return anchorElement
-// }
-
 const getBookImageElement = (href) => {
   const imageElement = document.createElement("img");
   imageElement.src = href;
@@ -99,6 +91,9 @@ const getBookInfoArea = (item) => {
  * fetch를 async, await 형태로 변경한 뒤 정상적으로 받은 response를 return한다.
  * 수신하는 쪽에서도 async / await형태이어야 한다.
  * @returns book list
+ */
+/**
+ * TODO display개수를 서버로 넘겨주어서 처리할 것!!
  */
 const getSearchedBookList = async (searchKeyword) => {
   // http://localhost:4242/search?keyword=python&page=43
@@ -188,7 +183,12 @@ const searchBooks = async () => {
 };
 
 /**
+ * 다른 파일에서 참고한 함수 배치 방식인데 이대로 하여도 되는가?
+ * 추가 자료조사하여 코드 배치 스타일 파악 필요
  *
+ * 현재 방식
+ * 상단 tag element 담아두는 변수
+ * 하단 event 등록
  */
 window.addEventListener("load", () => {
   searchButton.addEventListener("click", searchBooks);
