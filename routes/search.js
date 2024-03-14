@@ -19,20 +19,28 @@ router.get("/", async (req, res) => {
   // const apiResponse = await axios.get("/v1/search/book.json", {
   //   baseURL: "https://openapi.naver.com",
 
-  const { keyword, start, display } = req.query.keyword || "";
-  if (!keyword || !start || !display) {
-    console.error(
-      `keyword : ${keyword}\nstart : ${start}\ndisplay : ${display}`
-    );
-    res.status(404).send("");
+  const { keyword, start, display } = req.query || "";
+  // const keyword = req.query.keyword || "";
+
+  // if (!keyword || !start || !display) {
+  if (!keyword) {
+    console.error(`keyword : ${keyword}`);
+    // console.error(
+    //   `keyword : ${keyword}\nstart : ${start}\ndisplay : ${display}`
+    // );
+    res
+      .status(404)
+      .send(
+        "Could not found query parameter such as keyword, display count, start item number"
+      );
   }
-  const page = req.query.page || 1;
+  // const page = req.query.page || 1;
   // const display = 10;
   // const start = 1 + display * (page - 1);
-  console.log(`keyword: ${keyword}`);
+  console.log(`keyword : ${keyword}\nstart : ${start}\ndisplay : ${display}`);
   const apiResponse = await axios
     .get(apiEndpoint, {
-      params: { query: keyword, start: 1, display: 5 },
+      params: { query: keyword, start: start, display: display },
       headers: {
         "X-Naver-Client-Id": process.env.NAVER_BOOK_API_CLIENT_ID,
         "X-Naver-Client-Secret": process.env.NAVER_BOOK_API_CLIENT_SECRET,

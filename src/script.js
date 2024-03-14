@@ -106,7 +106,7 @@ const getSearchedBookList = async (searchKeyword) => {
   // const apiEndpoint = `https://openapi.naver.com/v1/search/book.json?
   // query=${req.query}&start=1&sort=sim&display=42`;
   const start = 1;
-  const display = 5;
+  const display = 51;
   const URL = "http://localhost:4242";
   // let으로하면 쪼개서 각 쿼리 파라미터 추가 가능할테지만 const인게 나을것인가?
   const searchURL =
@@ -117,6 +117,7 @@ const getSearchedBookList = async (searchKeyword) => {
     start +
     "&display=" +
     display;
+  // const searchURL = URL + "/search?keyword=" + searchKeyword;
   console.log(`##searchURL : ${searchURL}`);
   const response = await fetch(searchURL);
   const data = await response.json();
@@ -191,7 +192,7 @@ const searchBooks = async () => {
   console.log(searchedBookList);
 
   // inputElement.value = "";
-  for (item of searchedBookList["items"]) {
+  for (const item of searchedBookList["items"]) {
     renderBookElement(item);
   }
 };
