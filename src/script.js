@@ -103,8 +103,20 @@ const getSearchedBookList = async (searchKeyword) => {
   // 현재 페이지의 전체 URL 가져오기
   // const currentURL = window.location.href;
   // console.log(`currentURL: ${currentURL}`);
+  // const apiEndpoint = `https://openapi.naver.com/v1/search/book.json?
+  // query=${req.query}&start=1&sort=sim&display=42`;
+  const start = 1;
+  const display = 5;
   const URL = "http://localhost:4242";
-  const searchURL = URL + "/search?keyword=" + searchKeyword;
+  // let으로하면 쪼개서 각 쿼리 파라미터 추가 가능할테지만 const인게 나을것인가?
+  const searchURL =
+    URL +
+    "/search?keyword=" +
+    searchKeyword +
+    "&start=" +
+    start +
+    "&display=" +
+    display;
   console.log(`##searchURL : ${searchURL}`);
   const response = await fetch(searchURL);
   const data = await response.json();
